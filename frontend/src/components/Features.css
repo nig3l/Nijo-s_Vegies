@@ -1,0 +1,35 @@
+/* Features.css */
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
+    background-color: #024731; /* Dark green background */
+  }
+  
+  .feature-card {
+    width: 250px;
+    text-align: center;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-icon {
+    font-size: 3rem;
+    color: #024731; /* Dark green color for icon */
+    margin-bottom: 1rem;
+  }
+  
+  .feature-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color:black;
+    margin: 1rem 0;
+  }
+  
+  .feature-description {
+    font-size: 1rem;
+    color:black;
+  }
+  
