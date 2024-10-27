@@ -14,7 +14,7 @@ const Header = () => {
                 {/* Logo */}
                 <div style={{ display: 'flex', alignItems: 'center', fontSize: '24px', color: '#004d40', fontWeight: 'bold' }}>
                     <span>EST. 2024</span>
-                    <div style={{ marginLeft: '2px', fontSize: '32px', fontFamily: 'Serif' }}>Nijo's Vegies</div>
+                    <div style={{ marginLeft: '2px', fontSize: '32px', fontFamily: 'Serif' }}>Nigel's Vegies</div>
                     <div style={{ fontSize: '14px', color: '#4CAF50', marginTop: '-15px' }}>Food Market</div>
                 </div>
 
