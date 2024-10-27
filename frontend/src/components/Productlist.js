@@ -1,6 +1,13 @@
 import React from 'react';
 import ProductCard from './Productcard';
 import './Productlist.css';
+import onionImage from './assets/onions.jpg';
+import tomatoImage from './assets/tomato.jpg';
+import cilantroImage from './assets/cilantro.jpg';
+import kalesImage from './assets/kales.jpg';
+import redcabbageImage from './assets/redcabbage.jpg';
+import spinachImage from './assets/spinach.jpg';
+import carrotsImage from './assets/carrots.jpg';
 
 const products = [
   {
@@ -9,56 +16,56 @@ const products = [
     price: 109,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: onionImage,
   },
 
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
-    price: 109,
+    name: 'Tomato Italian - (Appx. 8 Pieces) Per Kg',
+    price: 79,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: tomatoImage,
   },
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
-    price: 109,
+    name: 'Carrots - (Appx. 10 Pieces) Per Kg',
+    price: 79,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: carrotsImage,
   },
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
-    price: 109,
+    name: '(sukuma wiki)Collard Greens -  Per Bunch',
+    price: 35,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: kalesImage,
   },
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
-    price: 109,
+    name: '(Spinach) Swiss Chard -  Per Bunch',
+    price: 35,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: spinachImage,
   },
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
-    price: 109,
+    name: '(Dhania) Cilantro - Per Bunch',
+    price: 29,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: cilantroImage,
   },
   {
     id: 1,
-    name: 'Red Onions - (Appx. 10 Pieces) Per Kg',
+    name: 'Red Cabbage - (Appx. 1 Head) per Kg ',
     price: 109,
     originalPrice: null,
     isSale: false,
-    image: '/path/to/red-onion-image.jpg',
+    image: redcabbageImage,
   },
   
   
