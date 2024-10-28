@@ -4,8 +4,6 @@ import './header.css';
 
 const Header = () => {
     // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
-
-
     return (
         <header>
             <div className="top-banner">
