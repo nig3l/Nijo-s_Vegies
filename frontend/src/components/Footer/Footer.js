@@ -43,7 +43,7 @@ const Footer = () => {
         <div className="footer-section social-newsletter">
           <h3>Connect with Us</h3>
           <SocialIcons />
-          <Newsletter />
+          {/* <Newsletter /> */}
         </div>
       </div>
 

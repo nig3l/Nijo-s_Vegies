@@ -1,11 +1,45 @@
 import React from "react";
+import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import "./SocialIcons.css"; 
 
 const SocialIcons = () => {
   return (
     <div className="social-icons">
-      <a href="#"><img src="facebook-icon.png" alt="Facebook" /></a>
-      <a href="#"><img src="twitter-icon.png" alt="Twitter" /></a>
-      <a href="#"><img src="instagram-icon.png" alt="Instagram" /></a>
+      <a 
+        href="https://facebook.com/yourpage" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="social-icon facebook"
+      >
+        <FaFacebook size={24} />
+      </a>
+      
+      <a 
+        href="https://twitter.com/handle" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="social-icon twitter"
+      >
+        <FaTwitter size={24} />
+      </a>
+      
+      <a 
+        href="https://instagram.com/profile" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="social-icon instagram"
+      >
+        <FaInstagram size={24} />
+      </a>
+
+      <a 
+        href="https://wa.me/phonenumber" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="social-icon whatsapp"
+      >
+        <FaWhatsapp size={24} />
+      </a>
     </div>
   );
 };

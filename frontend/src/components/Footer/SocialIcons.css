@@ -1,0 +1,53 @@
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icon {
+    color: #333;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Individual social media colors on hover */
+.facebook:hover {
+    color: #1877f2;
+    transform: translateY(-3px);
+}
+
+.twitter:hover {
+    color: #1da1f2;
+    transform: translateY(-3px);
+}
+
+.instagram:hover {
+    color: #e4405f;
+    transform: translateY(-3px);
+}
+
+.whatsapp:hover {
+    color: #25D366;
+    transform: translateY(-3px);
+}
+
+/* Optional: Add a subtle background effect on hover */
+.social-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .social-icons {
+        gap: 15px;
+    }
+    
+    .social-icon {
+        padding: 6px;
+    }
+}
