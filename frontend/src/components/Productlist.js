@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from './Productcard';
 import './Productlist.css';
+import { useNavigate } from 'react-router-dom';
 import onionImage from './assets/onions.jpg';
 import tomatoImage from './assets/tomato.jpg';
 import cilantroImage from './assets/cilantro.jpg';
@@ -67,9 +68,8 @@ const products = [
     isSale: false,
     image: redcabbageImage,
   },
-  
-  
 ];
+
 
 const ProductList = () => {
   return (
