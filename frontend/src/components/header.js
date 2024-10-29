@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaHeart, FaUser, FaShoppingBag, FaGift } from 'react-icons/fa';
 import './header.css';
 
@@ -35,7 +35,7 @@ const Header = () => {
                     </div>
                     <div className="account-wrapper">
                         <FaUser size={20} />
-                        <span className="account-text">My Account | Log In</span>
+                        <span className="account-text">My Account</span>
                     </div>
                     <div className="cart-wrapper">
                         <FaShoppingBag size={20} />
