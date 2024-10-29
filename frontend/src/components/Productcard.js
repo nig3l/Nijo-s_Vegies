@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import './Productcard.css';
 
 const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
+  const navigate = useNavigate();
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -20,26 +22,42 @@ const ProductCard = ({ product }) => {
     setQuantity(prev => prev > 0 ? prev - 1 : 0);
   };
 
+  const handleAddToCart = () => {
+    if (quantity > 0) {
+      navigate(`/checkout/${product.id}`, { 
+        state: { 
+          product,
+          quantity 
+        }
+      });
+    }
+  };
+
   return (
     <div className="product-card">
       {product.isSale && <span className="sale-tag">Sale</span>}
       
-      <img 
-        src={product.image} 
-        alt={product.name} 
-        className="product-image" 
-      />
-      
-      <h3 className="product-name">{product.name}</h3>
-      
-      <p className="product-price">
-        {product.isSale && (
-          <span className="original-price">
-            KSh{product.originalPrice}
-          </span>
-        )}
-        KSh{product.price}
-      </p>
+      <div 
+        onClick={() => navigate(`/checkout/${product.id}`)}
+        style={{ cursor: 'pointer' }}
+      >
+        <img 
+          src={product.image} 
+          alt={product.name} 
+          className="product-image" 
+        />
+        
+        <h3 className="product-name">{product.name}</h3>
+        
+        <p className="product-price">
+          {product.isSale && (
+            <span className="original-price">
+              KSh{product.originalPrice}
+            </span>
+          )}
+          KSh{product.price}
+        </p>
+      </div>
       
       <div className="quantity-control">
         <button onClick={handleDecrement}>-</button>
@@ -52,11 +70,14 @@ const ProductCard = ({ product }) => {
         <button onClick={handleIncrement}>+</button>
       </div>
       
-      <button className="add-to-cart">
+      <button 
+        className="add-to-cart"
+        onClick={handleAddToCart}
+      >
         <FaShoppingCart />
       </button>
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductCard
