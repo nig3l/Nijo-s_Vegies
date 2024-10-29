@@ -5,6 +5,9 @@ import ProductList from './components/Productlist';
 import Features from './components/Features';
 import Footer from "./components/Footer/Footer";
 import Checkout from './components/checkout'; // New checkout component
+import { CartProvider } from './components/CartContext';
+import Cart from './components/Cart';
+
 
 function App() {
     return (
@@ -18,6 +21,7 @@ function App() {
                 <Features />
               </>
             } />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/checkout/:productId" element={<Checkout />} />
           </Routes>
           <Footer />

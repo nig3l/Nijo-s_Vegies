@@ -1,9 +1,14 @@
 import React from 'react';
-import { FaHeart, FaUser, FaShoppingBag, FaGift } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
+import { FaHeart, FaUser, FaShoppingBag, FaGift} from 'react-icons/fa';
 import './header.css';
+import { useCart } from './CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
+    const { getCartCount } = useCart();
+    const navigate = useNavigate();
+
     return (
         <header>
             <div className="top-banner">
@@ -27,6 +32,11 @@ const Header = () => {
                         Search
                     </button>
                 </div>
+
+                <div className="cart-icon" onClick={() => navigate('/cart')}>
+                    <FaShoppingCart />
+                   <span className="cart-count">{getCartCount()}</span>
+                  </div>
 
                 <div className="icons-section">
                     <div className="icon-wrapper">
