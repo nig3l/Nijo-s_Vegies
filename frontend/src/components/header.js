@@ -33,25 +33,27 @@ const Header = () => {
                     </button>
                 </div>
 
-                <div className="cart-icon" onClick={() => navigate('/cart')}>
-                    <FaShoppingCart />
-                   <span className="cart-count">{getCartCount()}</span>
-                  </div>
-
+               
                 <div className="icons-section">
-                    <div className="icon-wrapper">
+                    {/* <div className="icon-wrapper">
                         <FaHeart size={20} />
                         <span className="badge">0</span>
-                    </div>
+                    </div> */}
                     <div className="account-wrapper">
                         <FaUser size={20} />
                         <span className="account-text">My Account</span>
                     </div>
-                    <div className="cart-wrapper">
+                    {/* <div className="cart-wrapper">
                         <FaShoppingBag size={20} />
                         <span className="cart-amount">KSh109</span>
                         <span className="badge">1</span>
-                    </div>
+                    </div> */}
+
+                    <div className="cart-icon" onClick={() => navigate('/cart')}>
+                    <FaShoppingCart size={30} />
+                   <span className="cart-count">{getCartCount()}</span>
+                  </div>
+
                 </div>
             </div>
 
