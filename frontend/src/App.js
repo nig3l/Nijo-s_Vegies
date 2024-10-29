@@ -11,7 +11,8 @@ import Cart from './components/Cart';
 
 function App() {
     return (
-      <Router>
+      <CartProvider>
+        <Router>
         <div>
           <Header />
           <Routes>
@@ -27,6 +28,9 @@ function App() {
           <Footer />
         </div>
       </Router>
+
+      </CartProvider>
+      
     );
   }
   
