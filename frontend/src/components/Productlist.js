@@ -21,7 +21,7 @@ const products = [
   },
 
   {
-    id: 1,
+    id: 2,
     name: 'Tomato Italian - (Appx. 8 Pieces) Per Kg',
     price: 79,
     originalPrice: null,
@@ -29,7 +29,7 @@ const products = [
     image: tomatoImage,
   },
   {
-    id: 1,
+    id: 3,
     name: 'Carrots - (Appx. 10 Pieces) Per Kg',
     price: 79,
     originalPrice: null,
@@ -37,7 +37,7 @@ const products = [
     image: carrotsImage,
   },
   {
-    id: 1,
+    id: 4,
     name: '(sukuma wiki)Collard Greens -  Per Bunch',
     price: 35,
     originalPrice: null,
@@ -45,7 +45,7 @@ const products = [
     image: kalesImage,
   },
   {
-    id: 1,
+    id: 5,
     name: '(Spinach) Swiss Chard -  Per Bunch',
     price: 35,
     originalPrice: null,
@@ -53,7 +53,7 @@ const products = [
     image: spinachImage,
   },
   {
-    id: 1,
+    id: 6,
     name: '(Dhania) Cilantro - Per Bunch',
     price: 29,
     originalPrice: null,
@@ -61,7 +61,7 @@ const products = [
     image: cilantroImage,
   },
   {
-    id: 1,
+    id: 7,
     name: 'Red Cabbage - (Appx. 1 Head) per Kg ',
     price: 109,
     originalPrice: null,

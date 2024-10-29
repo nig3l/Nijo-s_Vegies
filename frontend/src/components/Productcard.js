@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './Productcard.css';
+import { useCart } from './CartContext';
 
 const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
-  const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -24,12 +25,8 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = () => {
     if (quantity > 0) {
-      navigate(`/checkout/${product.id}`, { 
-        state: { 
-          product,
-          quantity 
-        }
-      });
+      addToCart(product, quantity);
+      setQuantity(0); // Reset quantity after adding to cart
     }
   };
 
@@ -37,27 +34,22 @@ const ProductCard = ({ product }) => {
     <div className="product-card">
       {product.isSale && <span className="sale-tag">Sale</span>}
       
-      <div 
-        onClick={() => navigate(`/checkout/${product.id}`)}
-        style={{ cursor: 'pointer' }}
-      >
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="product-image" 
-        />
-        
-        <h3 className="product-name">{product.name}</h3>
-        
-        <p className="product-price">
-          {product.isSale && (
-            <span className="original-price">
-              KSh{product.originalPrice}
-            </span>
-          )}
-          KSh{product.price}
-        </p>
-      </div>
+      <img 
+        src={product.image} 
+        alt={product.name} 
+        className="product-image" 
+      />
+      
+      <h3 className="product-name">{product.name}</h3>
+      
+      <p className="product-price">
+        {product.isSale && (
+          <span className="original-price">
+            KSh{product.originalPrice}
+          </span>
+        )}
+        KSh{product.price}
+      </p>
       
       <div className="quantity-control">
         <button onClick={handleDecrement}>-</button>
@@ -80,4 +72,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard
+export default React.memo(ProductCard);
