@@ -69,12 +69,10 @@ const Cart = () => {
         </div>
         <div className="cart-actions">
           <button onClick={() => navigate('/')}>Continue Shopping</button>
-          <button 
-            onClick={() => navigate('/checkout')}
-            className="checkout-button"
-          >
-            Proceed to Checkout
-          </button>
+          <button onClick={() => navigate('/checkout', { state: { cart } })} className="checkout-button">
+                Proceed to Checkout
+            </button>
+
         </div>
       </div>
     </div>
