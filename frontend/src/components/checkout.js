@@ -265,7 +265,10 @@ const Checkout = () => {
             {/* Stripe Card Element */}
             <div className="form-group">
               <label>Card Details</label>
-              <div id="card-element" className="card-element" />
+              <input
+              type="text"
+              />
+              {/* <div id="card-element" className="card-element" /> */}
             </div>
           </div>
 
@@ -279,7 +282,7 @@ const Checkout = () => {
                 Processing...
               </span>
             ) : (
-              `Pay KSh${product.price * quantity}`
+              `Pay KSh`
             )}
           </button>
         </form>

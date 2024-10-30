@@ -32,8 +32,8 @@ function App() {
                    element={
                 <Elements stripe={stripePromise}>
            <Checkout />
-      </Elements>
-       }/>
+           </Elements>
+            }/>
 
             </Routes>
             <Footer />
