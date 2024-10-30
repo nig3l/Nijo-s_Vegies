@@ -28,13 +28,13 @@ function App() {
               } />
               <Route path="/cart" element={<Cart />} />
               <Route 
-                path="/checkout/:productId" 
-                element={
-                  <Elements stripe={stripePromise}>
-                    <Checkout />
-                  </Elements>
-                } 
-              />
+                   path="/checkout" 
+                   element={
+                <Elements stripe={stripePromise}>
+           <Checkout />
+      </Elements>
+       }/>
+
             </Routes>
             <Footer />
           </div>

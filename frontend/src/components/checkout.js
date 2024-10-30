@@ -3,9 +3,11 @@ import { useLocation, useParams } from 'react-router-dom';
 import './checkout.css';  
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useCart } from './CartContext'
 
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 
 {/* <Elements stripe={stripePromise}>
   <Checkout />
@@ -15,9 +17,10 @@ const Checkout = () => {
   const { productId } = useParams();
   const location = useLocation();
   const { cart = [] } = location.state || {};
-  const { product, quantity } = location.state || {};
+  const {quantity } = location.state || {};
   const stripe = useStripe();
-  const elements = useElements();
+  const elements = useElements()
+  const product = cart[0]?.product;
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -84,15 +87,28 @@ const Checkout = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+
           body: JSON.stringify({
-            amount: product.price * quantity,
+            amount: cart.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0),
             currency: 'kes',
             customer_email: formData.email,
             metadata: {
-              product_id: productId,
-              quantity: quantity,
-            }
+              cart: cart.map(({ product, quantity }) => ({
+                product_id: product.id,
+                quantity,
+              })),
+            },
           }),
+          
+          // body: JSON.stringify({
+          //   amount: product.price * quantity,
+          //   currency: 'kes',
+          //   customer_email: formData.email,
+          //   metadata: {
+          //     product_id: productId,
+          //     quantity: quantity,
+            // }
+          // }),
         });
 
         if (!response.ok) {
@@ -108,7 +124,7 @@ const Checkout = () => {
         const result = await stripe.confirmPayment({
           clientSecret,
           payment_method: {
-            card: <CardElement /> ,
+            card: elements.getElement(CardElement) ,
             billing_details: {
               name: formData.fullName,
               email: formData.email,
@@ -151,15 +167,19 @@ const Checkout = () => {
 
     <Elements stripe={stripePromise}>
     <div className="checkout-container">
-      <div className="order-summary">
-        <h2>Order Summary</h2>
-        <div className="summary-details">
-          <p className="product-name">{product.name}</p>
-          <p>Quantity: {quantity}</p>
-          <p>Price per item: KSh{product.price}</p>
-          <p className="total-price">Total: KSh{product.price * quantity}</p>
-        </div>
-      </div>
+    <div className="order-summary">
+      <h2>Order Summary</h2>
+   {cart.map(({ product, quantity }) => (
+    <div key={product.id} className="summary-details">
+      <p className="product-name">{product.name}</p>
+      <p>Quantity: {quantity}</p>
+      <p>Price per item: KSh{product.price}</p>
+      <p className="total-price">Total: KSh{product.price * quantity}</p>
+    </div>
+  ))}
+  <p className="overall-total">Grand Total: KSh{cart.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0)}</p>
+</div>
+
 
       <div className="payment-section">
         <h2>Payment Details</h2>
