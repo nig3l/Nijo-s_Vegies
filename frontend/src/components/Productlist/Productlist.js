@@ -22,7 +22,7 @@ const products = [
 
   {
     id: 2,
-    name: 'Tomato Italian - (Appx. 8 Pieces) Per Kg',
+    name: 'Tomatoes - (Appx. 8 Pieces) Per Kg',
     price: 79,
     originalPrice: null,
     isSale: false,

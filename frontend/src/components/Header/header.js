@@ -47,19 +47,22 @@ const Header = () => {
 
                
                 <div className="icons-section">
+
                     {/* <div className="icon-wrapper">
                         <FaHeart size={20} />
                         <span className="badge">0</span>
                     </div> */}
+
                     <div className="account-wrapper">
                         <FaUser size={20} />
                         <span className="account-text">My Account</span>
                     </div>
-                    {/* <div className="cart-wrapper">
+
+                    <div className="cart-wrapper">
                         <FaShoppingBag size={20} />
                         <span className="cart-amount">KSh109</span>
                         <span className="badge">1</span>
-                    </div> */}
+                    </div>
 
                     <div className="cart-icon" onClick={() => navigate('/cart')}>
                     <FaShoppingCart size={30} />
@@ -78,7 +81,7 @@ const Header = () => {
 
             <div className="cta-container">
                 <button className="cta-button">
-                    <FaGift /> Gifts And Flowers
+                    <FaGift /> Healthy Living
                 </button>
             </div>
         </header>
