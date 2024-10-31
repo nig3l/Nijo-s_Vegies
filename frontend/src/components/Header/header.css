@@ -211,3 +211,39 @@
         padding: 8px;
     }
 }
+
+.wallet-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f8f8f8;
+}
+
+.wallet-details {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wallet-balance {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.deposit-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.wallet-label {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: 8px;
+}

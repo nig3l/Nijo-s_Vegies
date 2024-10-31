@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { FaHeart, FaUser, FaShoppingBag, FaGift} from 'react-icons/fa';
 import './header.css';
-import { useCart } from './CartContext';
+import { useCart } from '../cart/CartContext';
+import { useWallet } from '../../context/WalletContext';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { getCartCount } = useCart();
     const navigate = useNavigate();
+    const { walletBalance } = useWallet();
     const [searchTerm ,setSearchTerm] = useState('');
 
     const handleSearch = () => {
@@ -47,20 +49,24 @@ const Header = () => {
 
                
                 <div className="icons-section">
+
                     {/* <div className="icon-wrapper">
                         <FaHeart size={20} />
                         <span className="badge">0</span>
                     </div> */}
+
                     <div className="account-wrapper">
                         <FaUser size={20} />
                         <span className="account-text">My Account</span>
                     </div>
-                    {/* <div className="cart-wrapper">
+                    <div className="wallet-wrapper" onClick={() => navigate('/wallet')}>
                         <FaShoppingBag size={20} />
-                        <span className="cart-amount">KSh109</span>
-                        <span className="badge">1</span>
-                    </div> */}
-
+                        <div className="wallet-details">
+                            <span className="wallet-balance">KSh {walletBalance}</span>
+                            <button className="deposit-btn">Top Up</button>
+                        </div>
+                        <span className="wallet-label">My Wallet</span>
+                    </div>
                     <div className="cart-icon" onClick={() => navigate('/cart')}>
                     <FaShoppingCart size={30} />
                    <span className="cart-count">{getCartCount()}</span>
@@ -78,7 +84,7 @@ const Header = () => {
 
             <div className="cta-container">
                 <button className="cta-button">
-                    <FaGift /> Gifts And Flowers
+                    <FaGift /> Healthy Living
                 </button>
             </div>
         </header>
