@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { FaHeart, FaUser, FaShoppingBag, FaGift} from 'react-icons/fa';
 import './header.css';
@@ -8,6 +8,15 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
     const { getCartCount } = useCart();
     const navigate = useNavigate();
+    const [searchTerm ,setSearchTerm] = useState('');
+
+    const handleSearch = () => {
+        if (searchTerm) {
+            navigate('/search', { state: { searchTerm } }); // Navigate with search term as state
+        }
+    };
+
+
 
     return (
         <header>
@@ -27,8 +36,11 @@ const Header = () => {
                         type="text"
                         placeholder="Search"
                         className="search-input"
+                        value={searchTerm}
+                        onChange={(e)=> setSearchTerm(e.target.value)}
+                        
                     />
-                    <button className="search-button">
+                    <button className="search-button" onClick={handleSearch}>
                         Search
                     </button>
                 </div>
