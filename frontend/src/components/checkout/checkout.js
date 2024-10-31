@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import './checkout.css';  
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useCart } from './CartContext'
+// import { useCart } from ''
 
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);

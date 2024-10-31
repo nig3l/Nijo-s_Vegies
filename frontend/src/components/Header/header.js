@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { FaHeart, FaUser, FaShoppingBag, FaGift} from 'react-icons/fa';
 import './header.css';
-import { useCart } from './CartContext';
+import { useCart } from '../cart/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {

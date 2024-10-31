@@ -1,14 +1,14 @@
 import React from 'react';
-import ProductCard from './Productcard';
+import ProductCard from '../Productcard/Productcard';
 import './Productlist.css';
 import { useNavigate } from 'react-router-dom';
-import onionImage from './assets/onions.jpg';
-import tomatoImage from './assets/tomato.jpg';
-import cilantroImage from './assets/cilantro.jpg';
-import kalesImage from './assets/kales.jpg';
-import redcabbageImage from './assets/redcabbage.jpg';
-import spinachImage from './assets/spinach.jpg';
-import carrotsImage from './assets/carrots.jpg';
+import onionImage from '../assets/onions.jpg';
+import tomatoImage from '../assets/tomato.jpg';
+import cilantroImage from '../assets/cilantro.jpg';
+import kalesImage from '../assets/kales.jpg';
+import redcabbageImage from '../assets/redcabbage.jpg';
+import spinachImage from '../assets/spinach.jpg';
+import carrotsImage from '../assets/carrots.jpg';
 
 const products = [
   {
