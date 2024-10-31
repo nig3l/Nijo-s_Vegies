@@ -3,11 +3,13 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { FaHeart, FaUser, FaShoppingBag, FaGift} from 'react-icons/fa';
 import './header.css';
 import { useCart } from '../cart/CartContext';
+import { useWallet } from '../../context/WalletContext';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { getCartCount } = useCart();
     const navigate = useNavigate();
+    const { walletBalance } = useWallet();
     const [searchTerm ,setSearchTerm] = useState('');
 
     const handleSearch = () => {
@@ -57,13 +59,14 @@ const Header = () => {
                         <FaUser size={20} />
                         <span className="account-text">My Account</span>
                     </div>
-
-                    <div className="cart-wrapper">
+                    <div className="wallet-wrapper" onClick={() => navigate('/wallet')}>
                         <FaShoppingBag size={20} />
-                        <span className="cart-amount">KSh109</span>
-                        <span className="badge">1</span>
+                        <div className="wallet-details">
+                            <span className="wallet-balance">KSh {walletBalance}</span>
+                            <button className="deposit-btn">Top Up</button>
+                        </div>
+                        <span className="wallet-label">My Wallet</span>
                     </div>
-
                     <div className="cart-icon" onClick={() => navigate('/cart')}>
                     <FaShoppingCart size={30} />
                    <span className="cart-count">{getCartCount()}</span>

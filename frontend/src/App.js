@@ -10,7 +10,8 @@ import Cart from './components/cart/Cart';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import SearchResults from './components/SearchResults/SearchResults';
-
+import { WalletProvider } from './context/WalletContext';
+import WalletDashboard from './pages/WalletDashboard';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -28,35 +29,37 @@ function App() {
   
 
     return (
-      <CartProvider>
-        <Router>
-          <div>
-            <Header products={products}/>
-            <Routes>
-              <Route path="/" element={
-                <>
-                  <ProductList />
-                  <Features />
-                </>
-              } />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/search" element={<SearchResults products={products} />} />
-              <Route 
-                   path="/checkout" 
-                   element={
-                <Elements stripe={stripePromise}>
-           <Checkout />
-           </Elements>
-            }/>
+      <WalletProvider>
+        <CartProvider>
+          <Router>
+            <div>
+              <Header products={products}/>
+              <Routes>
+                <Route path="/" element={
+                  <>
+                    <ProductList />
+                    <Features />
+                  </>
+                } />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/search" element={<SearchResults products={products} />} />
+                <Route path="/wallet" element={<WalletDashboard />} />
+                <Route 
+                     path="/checkout" 
+                     element={
+                  <Elements stripe={stripePromise}>
+             <Checkout />
+             </Elements>
+              }/>
 
-            </Routes>
-            <Footer />
-          </div>
-        </Router>
-      </CartProvider>
+              </Routes>
+              <Footer />
+            </div>
+          </Router>
+        </CartProvider>
+      </WalletProvider>
     );
-  }
-  
+  }  
 export default App;
 
 
