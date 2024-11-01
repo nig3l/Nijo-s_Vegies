@@ -25,7 +25,6 @@ ChartJS.register(
   Legend
 );
 
-// Rest of your component code...
 const WalletDashboard = () => {
   const { walletBalance } = useWallet();
 

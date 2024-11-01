@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import './Productcard.css';
+import './ProductCard.css';
 import { useCart } from '../cart/CartContext';
 
 const ProductCard = ({ product }) => {

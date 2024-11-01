@@ -1,65 +1,50 @@
-import React, { useState, useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';  // Updated import
+import LandingPage from './pages/LandingPage';
+import Login from './components/auth/Login';
 import Header from './components/Header/header';
-import ProductList from './components/Productlist/Productlist';
+import FooterSection from './components/Footer/Footer';
 import Features from './components/Features/Features';
-import Footer from "./components/Footer/Footer";
-import Checkout from './components/checkout/checkout';
+import ProductList from './components/Productlist/ProductList';
+import ProductCard from './components/Productcard/ProductCard';
+import SignUp from './components/auth/SignUp';
 import { CartProvider } from './components/cart/CartContext';
-import Cart from './components/cart/Cart';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import SearchResults from './components/SearchResults/SearchResults';
-import { WalletProvider } from './context/WalletContext';
-import WalletDashboard from './pages/WalletDashboard';
+import './pages/LandingPage.css';
+import './components/auth/Auth.css';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-
+const supabaseClient = createClient(
+  process.env.REACT_APP_SUPABASE_URL || '',
+  process.env.REACT_APP_SUPABASE_ANON_KEY || ''
+);
 
 function App() {
-  
-  const [products, setProducts] = useState([]);
+  return (
+    <SessionContextProvider supabaseClient={supabaseClient}>  {/* Updated component name */}
+      <CartProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route 
+              path="/products" 
+              element={
+                <>
+                  <Header />
+                  <ProductList />
+                  <ProductCard />
+                  <Features />
+                  <FooterSection />
+                </>
+              } 
+            />
+          </Routes>
+        </Router>
+      </CartProvider>
+    </SessionContextProvider>
+  );
+}
 
-  useEffect(() => {
-      fetch('/products.json') 
-          .then(response => response.json())
-          .then(data => setProducts(data))
-          .catch(error => console.error('Error loading products:', error));
-  }, []);
-  
-
-    return (
-      <WalletProvider>
-        <CartProvider>
-          <Router>
-            <div>
-              <Header products={products}/>
-              <Routes>
-                <Route path="/" element={
-                  <>
-                    <ProductList />
-                    <Features />
-                  </>
-                } />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/search" element={<SearchResults products={products} />} />
-                <Route path="/wallet" element={<WalletDashboard />} />
-                <Route 
-                     path="/checkout" 
-                     element={
-                  <Elements stripe={stripePromise}>
-             <Checkout />
-             </Elements>
-              }/>
-
-              </Routes>
-              <Footer />
-            </div>
-          </Router>
-        </CartProvider>
-      </WalletProvider>
-    );
-  }  
 export default App;
-
-
