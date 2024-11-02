@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductCard from '../Productcard/Productcard';
-import './Productlist.css';
+import ProductCard from '../Productcard/ProductCard';
+import './ProductList.css';
 import { useNavigate } from 'react-router-dom';
 import onionImage from '../assets/onions.jpg';
 import tomatoImage from '../assets/tomato.jpg';

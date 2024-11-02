@@ -1,5 +1,5 @@
 import React from "react";
-import FooterSection from "./Footersection";
+import FooterSection from "./FooterSection";
 import SocialIcons from "./Socialicons";
 import Newsletter from "./Newsletter";
 import "./Footer.css";

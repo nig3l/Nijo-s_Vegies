@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import ProductCard from '../Productcard/Productcard' // Adjust the path based on where ProductCard is located
+import ProductCard from './Productcard/Productcard' // Adjust the path based on where ProductCard is located
 import './searchResults.css';
 
 

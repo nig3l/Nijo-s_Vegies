@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import './Productcard.css';
+import './ProductCard.css';
 import { useCart } from '../cart/CartContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product = {} }) => {
   const [quantity, setQuantity] = useState(0);
   const { addToCart } = useCart();
 
@@ -35,20 +35,20 @@ const ProductCard = ({ product }) => {
       {product.isSale && <span className="sale-tag">Sale</span>}
       
       <img 
-        src={product.image} 
-        alt={product.name} 
+        src={product?.image} 
+        alt={product?.name} 
         className="product-image" 
       />
       
-      <h3 className="product-name">{product.name}</h3>
+      <h3 className="product-name">{product?.name}</h3>
       
       <p className="product-price">
-        {product.isSale && (
+        {product?.isSale && (
           <span className="original-price">
-            KSh{product.originalPrice}
+            KSh{product?.originalPrice}
           </span>
         )}
-        KSh{product.price}
+        KSh{product?.price}
       </p>
       
       <div className="quantity-control">
