@@ -104,6 +104,18 @@
     margin-left: 5px;
 }
 
+.profile-avatar {
+    object-fit: cover;
+    margin-right: 8px;
+  }
+  
+  .account-wrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
 /* Category Navigation */
 .category-nav {
     display: flex;

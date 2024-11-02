@@ -16,6 +16,7 @@ import Cart from './components/cart/Cart';
 import WalletDashboard from './pages/WalletDashboard';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Checkout from './components/checkout/checkout';
+import ProfilePage from './pages/ProfilePage';
 import './pages/LandingPage.css';
 import './components/auth/Auth.css';
 
@@ -72,6 +73,16 @@ function App() {
                   </div>
                 </ProtectedRoute>
               } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <div>
+                    <Header />
+                    <ProfilePage />
+                    <Footer />
+                  </div>
+                </ProtectedRoute>
+              } />
+       
             </Routes>
           </Router>
         </CartProvider>
