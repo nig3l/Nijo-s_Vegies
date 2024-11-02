@@ -15,6 +15,7 @@ import { CartProvider } from './components/cart/CartContext';
 import Cart from './components/cart/Cart';
 import WalletDashboard from './pages/WalletDashboard';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Checkout from './components/checkout/checkout';
 import './pages/LandingPage.css';
 import './components/auth/Auth.css';
 
@@ -32,7 +33,16 @@ function App() {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup" element={<SignUp />} />       
+              <Route path="/checkout" element={
+                <ProtectedRoute>
+                  <div>
+                    <Header />
+                    <Checkout />
+                    <Footer />
+                  </div>
+                </ProtectedRoute>
+              } />
               <Route path="/products" element={
                 <ProtectedRoute>
                   <div>
