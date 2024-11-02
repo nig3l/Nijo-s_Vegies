@@ -41,29 +41,38 @@ const ProfilePage = () => {
       setLoading(true);
       const file = event.target.files[0];
       const fileExt = file.name.split('.').pop();
-      const filePath = `${session.user.id}-${Math.random()}.${fileExt}`;
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${session.user.id}/${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
+      // Upload image to storage
+      const { error: uploadError, data } = await supabase.storage
         .from('avatars')
-        .upload(filePath, file);
+        .upload(filePath, file, {
+          upsert: true,
+          cacheControl: '3600'
+        });
 
       if (uploadError) throw uploadError;
 
+      // Get public URL
       const { data: { publicUrl } } = supabase.storage
         .from('avatars')
         .getPublicUrl(filePath);
 
-      await supabase
+      // Update profile with new avatar URL
+      const { error: updateError } = await supabase
         .from('profiles')
         .upsert({
           id: session.user.id,
           avatar_url: publicUrl,
-          updated_at: new Date(),
+          updated_at: new Date().toISOString()
         });
 
+      if (updateError) throw updateError;
       setAvatarUrl(publicUrl);
+
     } catch (error) {
-      console.error('Error uploading avatar!');
+      console.error('Error uploading avatar:', error.message);
     } finally {
       setLoading(false);
     }
