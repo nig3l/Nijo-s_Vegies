@@ -10,15 +10,31 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
-    if (!error) {
-      navigate('/products');  // Changed from '/dashboard' to '/products'
+    setError(null);
+    setLoading(true);
+
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (signInError) {
+        throw signInError;
+      }
+
+      if (data?.user) {
+        navigate('/products');
+      }
+    } catch (err) {
+      setError(err.message || 'An error occurred during login');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,6 +46,7 @@ const Login = () => {
     >
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
         <input
           type="email"
           placeholder="Email"
@@ -48,8 +65,9 @@ const Login = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           type="submit"
+          disabled={loading}
         >
-          Login
+          {loading ? 'Logging in...' : 'Login'}
         </motion.button>
       </form>
     </motion.div>

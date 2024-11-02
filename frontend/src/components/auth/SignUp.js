@@ -12,26 +12,42 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
+    setError(null);
+    setLoading(true);
 
-    const { error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          full_name: formData.name,
-        }
+    try {
+      if (formData.password !== formData.confirmPassword) {
+        throw new Error("Passwords don't match");
       }
-    });
 
-    if (!error) {
-      navigate('/login');
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+          }
+        }
+      });
+
+      if (signUpError) {
+        throw signUpError;
+      }
+
+      if (data?.user) {
+        navigate('/products', { 
+          state: { message: 'Registration successful! Please check your email to verify your account.' }
+        });
+      }
+    } catch (err) {
+      setError(err.message || 'An error occurred during registration');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +59,7 @@ const SignUp = () => {
     >
       <form onSubmit={handleSubmit}>
         <h2>Create Account</h2>
+        {error && <div className="error-message">{error}</div>}
         <input
           type="text"
           placeholder="Full Name"
@@ -75,8 +92,9 @@ const SignUp = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           type="submit"
+          disabled={loading}
         >
-          Sign Up
+          {loading ? 'Signing up...' : 'Sign Up'}
         </motion.button>
       </form>
     </motion.div>
