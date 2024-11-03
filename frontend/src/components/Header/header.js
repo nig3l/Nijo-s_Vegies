@@ -53,7 +53,7 @@ const Header = () => {
             </div>
 
             <div className="main-header">
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => navigate('/products')}>
                     <span className="est-year">EST. 2024</span>
                     <div className="brand-name">Nigel's Vegies</div>
                     <div className="brand-subtitle">Food Market</div>

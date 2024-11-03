@@ -24,13 +24,17 @@ const ProfilePage = () => {
         .select('username, avatar_url')
         .eq('id', session.user.id)
         .single();
-
+  
+      if (error) throw error;
+  
       if (data) {
         setUsername(data.username || '');
-        setAvatarUrl(data.avatar_url);
+        if (data.avatar_url) {
+          setAvatarUrl(data.avatar_url);
+        }
       }
     } catch (error) {
-      console.error('Error loading user data!');
+      console.error('Error loading user data:', error.message);
     } finally {
       setLoading(false);
     }
@@ -39,44 +43,60 @@ const ProfilePage = () => {
   const uploadAvatar = async (event) => {
     try {
       setLoading(true);
+      
+      if (!event.target.files || event.target.files.length === 0) {
+        throw new Error('You must select an image to upload.');
+      }
+  
       const file = event.target.files[0];
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${session.user.id}/${fileName}`;
-
-      // Upload image to storage
-      const { error: uploadError, data } = await supabase.storage
+      const fileName = `${session.user.id}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      
+      // First, delete the old avatar if it exists
+      if (avatarUrl) {
+        const oldFileName = avatarUrl.split('/').pop();
+        await supabase.storage
+          .from('avatars')
+          .remove([oldFileName]);
+      }
+  
+      // Uploading the new file
+      const { data, error: uploadError } = await supabase.storage
         .from('avatars')
-        .upload(filePath, file, {
-          upsert: true,
-          cacheControl: '3600'
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
         });
-
+  
       if (uploadError) throw uploadError;
-
-      // Get public URL
+  
+      // Get the public URL
       const { data: { publicUrl } } = supabase.storage
         .from('avatars')
-        .getPublicUrl(filePath);
-
-      // Update profile with new avatar URL
+        .getPublicUrl(fileName);
+  
+      // Update the profile with the new avatar URL
       const { error: updateError } = await supabase
         .from('profiles')
-        .upsert({
-          id: session.user.id,
+        .update({ 
           avatar_url: publicUrl,
           updated_at: new Date().toISOString()
-        });
-
+        })
+        .eq('id', session.user.id);
+  
       if (updateError) throw updateError;
+  
       setAvatarUrl(publicUrl);
-
+      alert('Avatar uploaded successfully!');
+      
     } catch (error) {
-      console.error('Error uploading avatar:', error.message);
+      console.error('Detailed upload error:', error);
+      alert(error.message);
     } finally {
       setLoading(false);
     }
   };
+
 
   const updateProfile = async () => {
     try {
@@ -94,6 +114,30 @@ const ProfilePage = () => {
       setLoading(false);
     }
   };
+
+  //function to download and display avatar
+useEffect(() => {
+  if (avatarUrl) {
+    const fetchImage = async () => {
+      try {
+        const { data, error } = await supabase.storage
+          .from('avatars')
+          .download(avatarUrl.split('/').pop());
+          
+        if (error) throw error;
+        
+        const url = URL.createObjectURL(data);
+        setAvatarUrl(url);
+      } catch (error) {
+        console.error('Error downloading image: ', error.message);
+      }
+    };
+
+    fetchImage();
+  }
+}, [avatarUrl, supabase]);
+
+
 
   return (
     <div className="profile-container">
