@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from '../Productcard/ProductCard';
+import ProductCard from '../ProductCard/ProductCard';
 import './ProductList.css';
 import { useNavigate } from 'react-router-dom';
 import onionImage from '../assets/onions.jpg';
