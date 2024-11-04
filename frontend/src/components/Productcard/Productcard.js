@@ -4,9 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import './ProductCard.css';
 import { useCart } from '../cart/CartContext';
 
-const ProductCard = ({ product = {} }) => {
+const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
   const { addToCart } = useCart();
+
+  // If no valid product data, return null after hooks are called
+  if (!product?.name || !product?.price || !product?.image) {
+    return null;
+  }
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -35,20 +40,20 @@ const ProductCard = ({ product = {} }) => {
       {product.isSale && <span className="sale-tag">Sale</span>}
       
       <img 
-        src={product?.image} 
-        alt={product?.name} 
+        src={product.image} 
+        alt={product.name} 
         className="product-image" 
       />
       
-      <h3 className="product-name">{product?.name}</h3>
+      <h3 className="product-name">{product.name}</h3>
       
       <p className="product-price">
-        {product?.isSale && (
+        {product.isSale && (
           <span className="original-price">
-            KSh{product?.originalPrice}
+            KSh{product.originalPrice}
           </span>
         )}
-        KSh{product?.price}
+        KSh{product.price}
       </p>
       
       <div className="quantity-control">

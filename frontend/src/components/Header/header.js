@@ -14,9 +14,10 @@ const Header = () => {
     const [searchTerm ,setSearchTerm] = useState('');
     const { profileData } = useProfile();
 
-    const handleSearch = () => {
-        if (searchTerm) {
-            navigate('/search', { state: { searchTerm } }); // Navigate with search term as state
+    const handleSearch = (e) => {
+        e.preventDefault(); // Prevent form submission
+        if (searchTerm.trim()) {
+            navigate('/search', { state: { searchTerm: searchTerm.trim() } });
         }
     };
 
@@ -33,19 +34,18 @@ const Header = () => {
                     <div className="brand-subtitle">Food Market</div>
                 </div>
 
-                <div className="search-container">
+                <form className="search-container" onSubmit={handleSearch}>
                     <input
                         type="text"
                         placeholder="Search"
                         className="search-input"
                         value={searchTerm}
-                        onChange={(e)=> setSearchTerm(e.target.value)}
-                        
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <button className="search-button" onClick={handleSearch}>
+                    <button type="submit" className="search-button">
                         Search
                     </button>
-                </div>
+                </form>
 
                
                 <div className="icons-section">
