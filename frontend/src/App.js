@@ -20,6 +20,8 @@ import ProfilePage from './pages/ProfilePage';
 import './pages/LandingPage.css';
 import './components/auth/Auth.css';
 import { ProfileProvider } from './context/ProfileContext';
+import SearchResults from './components/SearchResults/SearchResults';
+
 
 
 
@@ -82,6 +84,15 @@ function App() {
                   <div>
                     <Header />
                     <ProfilePage />
+                    <Footer />
+                  </div>
+                </ProtectedRoute>
+              } />
+              <Route path="/search" element={
+                <ProtectedRoute>
+                  <div>
+                    <Header />
+                    <SearchResults />
                     <Footer />
                   </div>
                 </ProtectedRoute>
