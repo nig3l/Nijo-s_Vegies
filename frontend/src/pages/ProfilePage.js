@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useProfile } from '../context/ProfileContext';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -9,6 +10,7 @@ const ProfilePage = () => {
   const [username, setUsername] = useState('');
   const [avatar, setAvatar] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const { updateProfileData } = useProfile();
 
   useEffect(() => {
     if (session?.user) {
@@ -29,9 +31,11 @@ const ProfilePage = () => {
   
       if (data) {
         setUsername(data.username || '');
-        if (data.avatar_url) {
-          setAvatarUrl(data.avatar_url);
-        }
+        setAvatarUrl(data.avatar_url);
+        updateProfileData({
+          username: data.username || '',
+          avatarUrl: data.avatar_url
+        });
       }
     } catch (error) {
       console.error('Error loading user data:', error.message);
@@ -52,7 +56,7 @@ const ProfilePage = () => {
       const fileExt = file.name.split('.').pop();
       const fileName = `${session.user.id}-${Math.random().toString(36).substring(7)}.${fileExt}`;
       
-      // First, delete the old avatar if it exists
+      // delete the old avatar if it exists
       if (avatarUrl) {
         const oldFileName = avatarUrl.split('/').pop();
         await supabase.storage
@@ -87,6 +91,10 @@ const ProfilePage = () => {
       if (updateError) throw updateError;
   
       setAvatarUrl(publicUrl);
+      updateProfileData({
+        username,
+        avatarUrl: publicUrl
+      });
       alert('Avatar uploaded successfully!');
       
     } catch (error) {

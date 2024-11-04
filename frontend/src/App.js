@@ -19,6 +19,8 @@ import Checkout from './components/checkout/checkout';
 import ProfilePage from './pages/ProfilePage';
 import './pages/LandingPage.css';
 import './components/auth/Auth.css';
+import { ProfileProvider } from './context/ProfileContext';
+
 
 
 const supabaseClient = createClient(
@@ -31,6 +33,7 @@ function App() {
     <SessionContextProvider supabaseClient={supabaseClient}>
       <WalletProvider>
         <CartProvider>
+          <ProfileProvider>
           <Router>
             <Routes>
               <Route path="/" element={<LandingPage />} />
@@ -86,6 +89,7 @@ function App() {
        
             </Routes>
           </Router>
+          </ProfileProvider>
         </CartProvider>
       </WalletProvider>
     </SessionContextProvider>
