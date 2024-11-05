@@ -62,7 +62,7 @@ const Checkout = () => {
           paymentMethod: formData.paymentMethod
         };
 
-        // Simulating API call
+        // Simulate a delay to mimic backend processing
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         // Redirect to success page

@@ -24,13 +24,13 @@ const Header = () => {
     return (
         <header>
             <div className="top-banner">
-                WELCOME TO NIGEL'S VEGIES, SHOP NOW & SAVE!!! FIRST ORDERS' ON US 🚚
+                WELCOME TO Ad-Astra, SHOP NOW & SAVE!!! FIRST ORDERS' ON US 🚚
             </div>
 
             <div className="main-header">
                 <div className="logo-container" onClick={() => navigate('/products')}>
                     <span className="est-year">EST. 2024</span>
-                    <div className="brand-name">Nigel's Vegies</div>
+                    <div className="brand-name">Ad-Astra</div>
                     <div className="brand-subtitle">Food Market</div>
                 </div>
 
